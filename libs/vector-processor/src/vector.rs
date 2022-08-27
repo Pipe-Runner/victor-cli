@@ -1,3 +1,5 @@
+use std::fmt;
+
 pub struct Vector {
     data: Vec<f32>,
 }
@@ -44,7 +46,7 @@ impl Vector {
         }
     }
 
-    pub fn scalar_mul(&self, k: i32) -> Self {
+    pub fn scalar_mul(&self, k: f32) -> Self {
         let mut new_data: Vec<f32> = vec![0.0; self.len()];
 
         for i in 0..self.len() {
@@ -54,6 +56,19 @@ impl Vector {
         Self {
             data: new_data,
         }
+    }
+}
+
+impl fmt::Display for Vector {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut output: Vec<String> = Vec::new();
+
+        for i in 0..self.len() {
+            let temp = self.data[i].to_string();
+            output.push(temp);
+        }
+
+        write!(f, "{}", output.join(", "))
     }
 }
 
@@ -70,11 +85,27 @@ mod test {
     }
 
     #[test]
+    fn add_unequal() {
+        let v1 = Vector::new(vec![1.0, 2.0, 3.0]);
+        let v2 = Vector::new(vec![4.0, 5.0, 6.0, 30.0]);
+        let v3 = v1.add(v2);
+        assert_eq!(v3.data, vec![5.0, 7.0, 9.0, 50.0]);
+    }
+
+    #[test]
     fn sub() {
         let v1 = Vector::new(vec![1.0, 2.0, 3.0, 20.0]);
         let v2 = Vector::new(vec![4.0, 5.0, 6.0, 30.0]);
         let v3 = v1.sub(v2);
         assert_eq!(v3.data, vec![-3.0, -3.0, -3.0, -10.0]);
+    }
+
+    #[test]
+    fn sub_unequal() {
+        let v1 = Vector::new(vec![1.0, 2.0, 3.0]);
+        let v2 = Vector::new(vec![4.0, 5.0, 6.0, 30.0]);
+        let v3 = v1.sub(v2);
+        assert_eq!(v3.data, vec![5.0, 7.0, 9.0, 50.0]);
     }
 
     #[test]
