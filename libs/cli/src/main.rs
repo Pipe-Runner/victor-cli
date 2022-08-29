@@ -16,7 +16,7 @@ fn convert_string_to_vector(input: &str) -> Vector {
 }
 
 fn main() {
-    println!("Welcome to Victor: Not so friendly Vector Processor\n");
+    println!("Welcome to Victor: Not so user friendly Vector Processor\n");
 
     println!("Please select an option:\n1. Add two vectors\n2. Subtract two vectors\n3. Multiply a scalar to a vector\n4. Angle between two vectors\n5. Dot product of two vectors\n6. Cross product of two 3D vectors\n7. Generate 3D basis from one vector\n8. Generate 3D basis from two vectors\n9. Exit");
     let operation: i32 = read_line().trim().parse::<i32>().unwrap();
