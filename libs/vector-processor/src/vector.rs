@@ -140,7 +140,7 @@ impl Vector {
 
     // Returns a 3D basis for a given vector.
     pub fn find_basis_with_two(v1: &Self, v2: &Self) -> (Self, Self, Self) {
-        if v1.dot(v2) == 1.0 {
+        if v1.cross(v2).norm() == 0. {
             // vectors are parallel
             return Self::find_basis_with_one(v1);
         }
